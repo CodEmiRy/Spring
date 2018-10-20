@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+</head>
+<body>
+<form th:action="@{/register}" method="post" th:object="${userRegistratrationDTO}">
+
+     <br><input type="text" th:field="*{firstName}" placeholder="Imię">
+     <span th:errors="*{firstName}"></span>
+     <br><input type="text" th:field="*{lastName}" placeholder="Nazwisko">
+     <br><span th:errors="*{lastName}"></span>
+     <br><input type="text" th:field="*{birthDate}" placeholder="Data urodzenia">
+     <br><input type="text" th:field="*{pesel}" placeholder="Pesel">
+     <br><span th:errors="*{pesel}"></span>
+     <br><input type="text" th:field="*{email}" placeholder="Email">
+     <br><span th:errors="*{email}"></span>
+     <br><input type="text" th:field="*{password}" placeholder="Hasło">
+     <br><input type="text" th:field="*{phone}" placeholder="Numer telefonu">
+     <br><input type="text" th:field="*{userAddress.zipCode}" placeholder="Kod pocztowy">
+     <br><input type="text" th:field="*{userAddress.city}" placeholder="Miasto">
+    <select th:field="*{userAddress.country}">
+        <option th:value="''" th:text="Wybierz"></option>
+        <option th:each="country : ${countries}" th:value="${country.symbol}" th:text="${country.plName}"></option>
+    </select>
+     <br><input type="text" th:field="*{userAddress.street}" placeholder="Ulica">
+     <br><label for="preferEmails">Woli maile?</label>
+     <br><input type="checkbox" th:field="*{preferEmails}" id="preferEmails">
+     <br><button>Wyślij</button>
+</form>
+</body>
+</html>
