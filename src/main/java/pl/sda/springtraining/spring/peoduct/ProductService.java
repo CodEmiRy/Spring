@@ -6,22 +6,30 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
 public class ProductService {
-@Autowired
+    public ProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
+
+    @Autowired
+    private ProductToProductDTOBuilder productToProductDTOBuilder;
     private ProductDAO productDAO;
-    public void createNewProduct(String productName, Integer stockAmount, BigDecimal price) {
+    public Product createNewProduct(String productName, Integer stockAmount, BigDecimal price) {
         Product product = new Product();
         product.setProductName(productName);
         product.setStockAmount(stockAmount);
         product.setPrice(price);
-        productDAO.saveProduct(product);
+       return productDAO.saveProduct(product);
     }
 
-    public List<Product> findProducts() {
-       return productDAO.findProducts();
+    public List<ProductDTO> findProducts() {
+       return productDAO.findProducts().stream()
+               .map(p-> productToProductDTOBuilder.rewriteProductToProductDTO(p))
+               .collect(Collectors.toList());
     }
 
     public Optional<Product> findProductById(Integer id) {

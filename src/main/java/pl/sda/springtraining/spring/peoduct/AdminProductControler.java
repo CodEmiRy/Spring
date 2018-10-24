@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Controller
-public class ProductControler {
+@RequestMapping(value = "/admin")
+public class AdminProductControler {
 
     @Autowired
     private ProductService productService;

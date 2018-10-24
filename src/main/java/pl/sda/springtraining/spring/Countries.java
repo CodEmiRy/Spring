@@ -2,6 +2,8 @@ package pl.sda.springtraining.spring;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum Countries {
     POLAND("PL", "Polska"),
@@ -16,5 +18,11 @@ public enum Countries {
     Countries(String symbol, String plName) {
         this.symbol = symbol;
         this.plName = plName;
+    }
+
+    public static Countries findCountryBbySymbil(String symbol){
+      return   Arrays.stream(Countries.values())
+                .filter(e -> e.getSymbol().equals(symbol))
+                .findFirst().orElse(null);
     }
 }

@@ -5,13 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sda.springtraining.spring.Countries;
-import pl.sda.springtraining.spring.user.UserLoginService;
-import pl.sda.springtraining.spring.user.UserRegistrationService;
-import pl.sda.springtraining.spring.user.UserRegistratrationDTO;
 
 import javax.validation.Valid;
 
@@ -44,4 +42,8 @@ public class UserControler {
         return "registerForm";
     }
 
+    @GetMapping(value = "/login")
+    public String loginForm() {
+        return "loginForm";
+    }
 }
